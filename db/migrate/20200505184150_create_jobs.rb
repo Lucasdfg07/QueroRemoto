@@ -7,6 +7,7 @@ class CreateJobs < ActiveRecord::Migration[6.0]
       t.string :description
       t.date :post_date
       t.string :link
+      t.string :salary
 
       t.timestamps
     end
