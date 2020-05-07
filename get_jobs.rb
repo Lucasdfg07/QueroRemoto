@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require 'byebug'
 
 class Scraper
   def get_jobs
@@ -49,7 +48,6 @@ class Scraper
 	  	jobs = doc.css('.element-vaga')
 
 	  	jobs.each do |job|
-	  		byebug
 	  		if (job.css('.vaga').css('h2').text).include?("emot")
 				website_scraping(all_jobs, (job.css('.vaga-logo').children[1].values[5].present?) ? job.css('.vaga-logo').children[1].values[5].present? : nil, 
 								 job.css('.vaga').css('h2').text,
@@ -70,7 +68,6 @@ class Scraper
 	  	jobs = doc.css('.result')
 
 	  	jobs.each do |job|
-	  		byebug
 			website_scraping(all_jobs, job.css('.title').children.text,
 							 job.css('.company').text,
 							 job.css('.summary').text,
