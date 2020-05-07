@@ -9,18 +9,17 @@ class Scraper
   	all_jobs = []
 
   	url = "https://www.vagas.com.br/vagas-de-#{phrase}?b%5B%5D=Home+office"
-    vagas(all_jobs, url)
+    # vagas(all_jobs, url)
 
     
 
     url = "https://www.infojobs.com.br/empregos.aspx?Palabra=#{phrase}%20remoto"
-  	info_jobs(all_jobs, url)
+  	# info_jobs(all_jobs, url)
 
   	url = "https://www.indeed.com.br/empregos?q=#{phrase}&l="
   	indeed(all_jobs, url)
 
-  	puts all_jobs
-
+  	return all_jobs
   end
 
   def vagas(all_jobs, url)
@@ -104,3 +103,4 @@ end
 
 scrape = Scraper.new
 scrape.get_jobs
+puts scrape.get_jobs
