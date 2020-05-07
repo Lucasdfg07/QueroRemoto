@@ -7,7 +7,8 @@ class VagasCrawler
 	  	jobs = doc.css('.vaga')
 	  	
 	  	jobs.each do |job|
-			CentralCrawler.new.call(all_jobs, job.css('.informacoes-header').css('h2').children[1].attribute('title').text,
+			CentralCrawler.new.call(all_jobs, job.css('.logoEmpresa').children[1].values[1],
+							 job.css('.informacoes-header').css('h2').children[1].attribute('title').text,
 							 job.css('.informacoes-header').css('span')[0].text,
 							 job.css('.detalhes').children.children.text,
 							 job.css('.data-publicacao').children[1].text,
