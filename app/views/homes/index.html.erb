@@ -1,0 +1,70 @@
+<section class="center-align">
+
+	<section class="logo">
+		<%= image_tag 'logo', class: 'circle thumb responsive-img' %>
+	</section>
+
+	<section class="slogan card">
+		Quero remoto, um novo jeito de ser produtivo.
+		<hr />
+		Trabalhe em qualquer lugar. Encontre vagas remotas em todo o Brasil!
+	</section>
+
+	<section class="row m-top">
+		<section class="col m4 s8 offset-m4 offset-s2">
+			<%= form_with(url: homes_path, method: :get, html: {class: 'row'}) do |f| %>
+				<%= text_field_tag :query, nil, value: (params[:query].present?) ? params[:query] : '', placeholder: 'Digite o nome do cargo', class: 'col m8' %>
+				<%= submit_tag "Buscar", class: 'col m3 offset-m1 waves-effect waves-light btn red radius' %>
+			<% end %>
+		</section>
+	</section>
+
+	<section class="background-black">
+		<h4><% if @jobs.present? %><%= @jobs.count %> Vagas Encontradas<% end %></h4>
+
+		<hr />
+
+		<section class="container">
+			<% if params[:query].present? %>
+				<% @jobs.each do |job| %>
+					<section class="col m8 offset-m2 card">
+						<section class="row">
+							<section class="col m2 s8 offset-s2 m-20">
+								LOGO
+							</section>
+
+							<section class="col m7 s12 m-20">
+								<b><%= job[:name] %></b> <br />
+								<%= job[:company] %> <br />
+								<%= job[:description].truncate(30) %> <br />
+
+								<section class="row m-20">
+									<section class="col m6 offset-m3">
+										<section class="col m2 offset-m1">
+											<%= image_tag 'business', class: 'icon' %>
+										</section>
+
+										<section class="col m7">
+											<b style="color: green;"><%= job[:salary] %></b>
+										</section>
+									</section>
+								</section>
+							</section>
+
+							<section class="col m3 m-20">
+								<%= job[:post_date] %>
+
+								<br /><br />
+
+								<%= button_to 'Me candidatar', job[:link], class: 'btn waves-light waves-effect blue radius' %>
+							</section>
+						</section>
+					</section>
+				<% end %>
+			<% else %>
+				<h5>Efetue uma busca para começar!</h5>
+			<% end %>
+		</section>
+	</section>
+
+</section>

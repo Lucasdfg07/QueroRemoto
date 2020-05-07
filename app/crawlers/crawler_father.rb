@@ -13,9 +13,9 @@ class CrawlerFather
     url = "https://www.infojobs.com.br/empregos.aspx?Palabra=#{phrase.gsub(" ","%20")}%20remoto"
   	InfoJobsCrawler.new.call(all_jobs, url)
 
-  	url = "https://www.indeed.com.br/empregos?q=#{phrase.gsub(" ","-")}&l="
+  	url = "https://www.indeed.com.br/empregos?q=#{phrase.gsub(" ","-")}+remoto&l="
   	IndeedCrawler.new.call(all_jobs, url)
 
-  	puts all_jobs
+  	all_jobs
   end
 end
