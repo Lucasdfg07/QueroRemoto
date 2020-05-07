@@ -1,8 +1,9 @@
 class CentralCrawler
-	def call(all_jobs, name, company, description, post_date, link, salary)
+	def call(all_jobs, photo, name, company, description, post_date, link, salary)
 		salary = "a combinar" if salary.empty?
 
 		setting_array(all_jobs, 
+					  photo,
   					  name.strip.gsub("\n", " ").delete("\r"), 
   					  company.strip.gsub("\n", " ").delete("\r"), 
   					  description.strip.gsub("\n", " ").delete("\r"), 
@@ -11,8 +12,9 @@ class CentralCrawler
   					  salary.split.join(" "))
 	end
 
-	def setting_array(all_jobs, name, company, description, post_date, link, salary)
+	def setting_array(all_jobs, photo, name, company, description, post_date, link, salary)
 	  	job_array = {
+	  		photo: photo,
 	    	name: name,
 	    	company: company,
 	    	description: description,

@@ -14,12 +14,12 @@ class Scraper
     
 
     url = "https://www.infojobs.com.br/empregos.aspx?Palabra=#{phrase}%20remoto"
-  	# info_jobs(all_jobs, url)
+  	info_jobs(all_jobs, url)
 
   	url = "https://www.indeed.com.br/empregos?q=#{phrase}&l="
-  	indeed(all_jobs, url)
+  	# indeed(all_jobs, url)
 
-  	return all_jobs
+  	# puts all_jobs
   end
 
   def vagas(all_jobs, url)
@@ -31,7 +31,8 @@ class Scraper
 
 	  	
 	  	jobs.each do |job|
-			website_scraping(all_jobs, job.css('.informacoes-header').css('h2').children[1].attribute('title').text,
+			website_scraping(all_jobs, job.css('.logoEmpresa').children[1].values[1], 
+							 job.css('.informacoes-header').css('h2').children[1].attribute('title').text,
 							 job.css('.informacoes-header').css('span')[0].text,
 							 job.css('.detalhes').children.children.text,
 							 job.css('.data-publicacao').children[1].text,
@@ -48,8 +49,10 @@ class Scraper
 	  	jobs = doc.css('.element-vaga')
 
 	  	jobs.each do |job|
+	  		byebug
 	  		if (job.css('.vaga').css('h2').text).include?("emot")
-				website_scraping(all_jobs, job.css('.vaga').css('h2').text,
+				website_scraping(all_jobs, (job.css('.vaga-logo').children[1].values[5].present?) ? job.css('.vaga-logo').children[1].values[5].present? : nil, 
+								 job.css('.vaga').css('h2').text,
 								 job.css('.container-vaga').css('.vaga-company').text,
 								 job.css('.container-vaga').css('.area').text,
 								 job.css('.container-vaga').css('.location2').css('span')[0].text,
@@ -67,6 +70,7 @@ class Scraper
 	  	jobs = doc.css('.result')
 
 	  	jobs.each do |job|
+	  		byebug
 			website_scraping(all_jobs, job.css('.title').children.text,
 							 job.css('.company').text,
 							 job.css('.summary').text,
@@ -76,7 +80,7 @@ class Scraper
 		end
   end
 
-  def website_scraping(all_jobs, name, company, description, post_date, link, salary)
+  def website_scraping(all_jobs, photo, name, company, description, post_date, link, salary)
   		setting_array(all_jobs, 
   					  name.strip.delete("\n").delete("\r"), 
   					  company.strip.delete("\n").delete("\r"), 
@@ -86,8 +90,9 @@ class Scraper
   					  salary.split.join(" "))
   end
 
-  def setting_array(all_jobs, name, company, description, post_date, link, salary)
+  def setting_array(all_jobs, photo, name, company, description, post_date, link, salary)
 	  	job_array = {
+	  		photo: photo,
 	    	name: name,
 	    	company: company,
 	    	description: description,

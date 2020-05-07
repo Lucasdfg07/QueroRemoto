@@ -7,8 +7,11 @@ class InfoJobsCrawler
 	  	jobs = doc.css('.element-vaga')
 
 	  	jobs.each do |job|
+	  		photo = (!job.css('.vaga-logo').children[1].nil?) ? job.css('.vaga-logo').children[1].values[5] : nil
+	  		
 	  		if (job.css('.vaga').css('h2').text).include?("emot")
-				CentralCrawler.new.call(all_jobs, job.css('.vaga').css('h2').text,
+				CentralCrawler.new.call(all_jobs, photo,
+								 job.css('.vaga').css('h2').text,
 								 job.css('.container-vaga').css('.vaga-company').text,
 								 job.css('.container-vaga').css('.area').text,
 								 job.css('.container-vaga').css('.location2').css('span')[0].text,

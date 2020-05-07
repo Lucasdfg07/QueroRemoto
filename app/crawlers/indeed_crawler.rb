@@ -8,7 +8,8 @@ class IndeedCrawler
 
 	  	jobs.each do |job|
 	  		if (job.css('.title').children.text).include?("emot")
-				CentralCrawler.new.call(all_jobs, job.css('.title').children.text,
+				CentralCrawler.new.call(all_jobs, nil,
+								 job.css('.title').children.text,
 								 job.css('.company').text,
 								 job.css('.summary').text,
 								 job.css('.date')[0].text,
