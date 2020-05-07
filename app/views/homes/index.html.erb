@@ -30,7 +30,7 @@
 					<% @jobs.each do |job| %>
 						<section class="col m8 offset-m2 card">
 							<section class="row">
-								<section class="col m2 s8 offset-s2 m-20">
+								<section class="col m2 s8 offset-s2 m-20 photo">
 									<%= image_tag job[:photo] if job[:photo].present? %>
 								</section>
 
@@ -41,11 +41,11 @@
 
 									<section class="row m-20">
 										<section class="col m6 offset-m3 s4 offset-s4">
-											<section class="col m2 offset-m1 s4">
+											<section class="col m2 offset-m1 s2">
 												<%= image_tag 'business', class: 'icon' %>
 											</section>
 
-											<section class="col m7 s8">
+											<section class="col m7 s10">
 												<b style="color: green;"><%= job[:salary] %></b>
 											</section>
 										</section>
