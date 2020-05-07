@@ -16,4 +16,7 @@
 //= require_tree .
 //
 // Loader
-//= require loading_screen//= require serviceworker-companion
+//= require loading_screen
+//
+// PWA
+//= require serviceworker-companion
