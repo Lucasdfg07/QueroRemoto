@@ -14,6 +14,12 @@ gem 'material_icons'
 # To do the crawler
 gem 'pry-rails'
 
+# I18n
+gem 'rails-i18n'
+
+# Loader
+gem 'loading_screen'
+
 # Rest Calls
 gem 'rest-client'
 

@@ -6,10 +6,21 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
+    <% if alert %>
+      <p class="alert alert-danger alert"><%= alert %></p>
+    <% end %>
+
+    <% if notice %>
+      <p class="alert alert-success notice"><%= notice %></p>
+    <% end %>
+
     <%= yield %>
+
+    <%= render 'shared/footer' %>
   </body>
 </html>

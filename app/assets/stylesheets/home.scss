@@ -1,0 +1,62 @@
+body {
+	background-image: url('/assets/wallpaper.jpeg');
+	background-size: cover;
+
+	.logo {
+		img {
+			width: 250px;
+			margin-top: 20px;
+			opacity: 0.7;
+		}
+	}
+
+	.slogan {
+		padding: 10px 0px;
+		opacity: 0.7; 
+	}
+
+	#_homes_query {
+		border:none;
+		background-color: rgba(245,245,245,0.8);
+		color: black;
+		text-align: center;
+		border-radius: 20px;
+	}
+
+	::placeholder {
+		color: rgba(130,130,130,0.8);
+	}
+
+	.background-black {
+		background-color: rgba(10,10,10,0.6);
+
+		h4, h5 {
+			color: white;
+			padding: 10px;
+		}
+
+		.card {
+			background-color: rgba(245,245,245,0.8);
+		}
+
+		img {
+			width: 90%;
+		}
+	}
+}
+
+.m-top {
+	margin-top: 50px;
+}
+
+.m-20 {
+	margin-top: 20px;	
+}
+
+.icon {
+	width: 32px;
+}
+
+.radius  {
+	border-radius: 20px;
+}
