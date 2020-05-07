@@ -6,6 +6,9 @@
 Quero Remoto is an application developed for Brazilians to find remote jobs. It's a crawler that's returns only home office's jobs.
 Developed in Coronavírus pandemic times.
 
+### You can also check the mockup
+- https://www.figma.com/proto/1SMy7lKLAUdC2f6Dg9akHq/QueroRemoto?node-id=15%3A2&scaling=min-zoom
+
 
 ## Technology 
 
