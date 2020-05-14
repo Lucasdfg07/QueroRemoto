@@ -7,17 +7,17 @@ class InfoJobsCrawler
 	  	jobs = doc.css('.element-vaga')
 
 	  	jobs.each do |job|
+	  		
 	  		photo = (!job.css('.vaga-logo').children[1].nil?) ? job.css('.vaga-logo').children[1].values[5] : nil
+	  		name = job.css('.vaga').css('h2').text
+	  		company = job.css('.container-vaga').css('.vaga-company').text
+	  		description = job.css('.container-vaga').css('.area').text
+	  		post_date = job.css('.container-vaga').css('.location2').css('span')[0].text
+	  		link = job.css('.vaga').css('a').attribute('href').text
+	  		salary = Nokogiri::HTML(open(job.css('.vaga').css('a').attribute('href').text)).css('.divSubTitle').text
 	  		
 	  		if (job.css('.vaga').css('h2').text).include?("emot")
-				CentralCrawler.new.call(all_jobs, photo,
-								 job.css('.vaga').css('h2').text,
-								 job.css('.container-vaga').css('.vaga-company').text,
-								 job.css('.container-vaga').css('.area').text,
-								 job.css('.container-vaga').css('.location2').css('span')[0].text,
-								 job.css('.vaga').css('a').attribute('href').text,
-								 Nokogiri::HTML(open(job.css('.vaga').css('a').attribute('href').text)).css('.divSubTitle').text)
+				CentralCrawler.new.call(all_jobs, photo, name, company, description, post_date, link, salary) 
 			end
-		end
 	end
 end
