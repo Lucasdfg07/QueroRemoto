@@ -2,6 +2,10 @@ body {
 	background-image: url('/assets/wallpaper.jpeg');
 	background-size: cover;
 
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
 	.logo {
 		img {
 			width: 250px;
@@ -44,6 +48,10 @@ body {
 			border-radius: 20px;
 		}
 	}
+}
+
+main {
+	flex: 1 0 auto;
 }
 
 .m-top {

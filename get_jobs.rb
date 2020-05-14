@@ -1,24 +1,47 @@
 require 'nokogiri'
 require 'open-uri'
+# require 'byebug'
 
 class Scraper
   def get_jobs
-  	phrase = "Assistente"
+  	phrase = "programador"
 
   	all_jobs = []
 
   	url = "https://www.vagas.com.br/vagas-de-#{phrase}?b%5B%5D=Home+office"
     # vagas(all_jobs, url)
 
-    
-
     url = "https://www.infojobs.com.br/empregos.aspx?Palabra=#{phrase}%20remoto"
-  	info_jobs(all_jobs, url)
+  	# info_jobs(all_jobs, url)
 
   	url = "https://www.indeed.com.br/empregos?q=#{phrase}&l="
   	# indeed(all_jobs, url)
 
-  	# puts all_jobs
+  	url = "https://www.catho.com.br/vagas/#{phrase}-remoto/?q=#{phrase}+remoto&pais_id=31&faixa_sal_id_combinar=1&perfil_id=1&order=score&where_search=1&how_search=2"
+  	# catho(all_jobs, url)
+
+  	url = "https://www.trabalhabrasil.com.br/vagas-empregos/#{phrase}/home-office"
+  	# trabalhabrasil(all_jobs, url)
+
+  	puts all_jobs
+  end
+
+  def trabalhabrasil(all_jobs, url)
+  		html = open(url)
+
+	    doc = Nokogiri::HTML(html)
+
+	  	jobs = doc.css('.job__container')
+	  	
+	  	jobs.each do |job|
+			website_scraping(all_jobs, nil, 
+							 job.css('.job-vacancy-occupation').text,
+							 "Não Informado",
+							 job.css('.job-vacancy-description').text,
+							 "Não identificado",
+							 "https://trabalhabrasil.com.br#{job.css('.job-vacancy').attribute('href').value}",
+							 Nokogiri::HTML(open("https://trabalhabrasil.com.br#{job.css('.job-vacancy').attribute('href').value}")).css('.job-plain-text')[2].children.text)
+		end
   end
 
   def vagas(all_jobs, url)
@@ -37,6 +60,24 @@ class Scraper
 							 job.css('.data-publicacao').children[1].text,
 							 "http://vagas.com.br#{job.css('.link-detalhes-vaga').attribute('href').text}/",
 							 Nokogiri::HTML(open("http://vagas.com.br#{job.css('.link-detalhes-vaga').attribute('href').text}/")).css('.infoVaga')[0].css('.clearfix').css('li').css('div').css('span')[1].text)
+		end
+  end
+
+  def catho(all_jobs, url)
+  		html = open(url)
+
+	    doc = Nokogiri::HTML(html)
+
+	  	jobs = doc.css('.boxVaga')
+
+	  	jobs.each do |job|
+			website_scraping(all_jobs, nil,
+							 job.attribute('data-gtm-dimension-38').value,
+							 "Não Informado",
+							 job.css('.descriptionComplete').text,
+							 job.css('.dataAnuncio').text,
+							 job.css('.viewVagaAction').attribute('href').value,
+							 job.css('.salarioLocal').text)
 		end
   end
 
@@ -79,6 +120,7 @@ class Scraper
 
   def website_scraping(all_jobs, photo, name, company, description, post_date, link, salary)
   		setting_array(all_jobs, 
+  					  photo, 
   					  name.strip.delete("\n").delete("\r"), 
   					  company.strip.delete("\n").delete("\r"), 
   					  description.strip.delete("\n").delete("\r"), 

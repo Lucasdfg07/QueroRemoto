@@ -16,6 +16,7 @@ class CrawlerFather
     phrase = phrase.gsub("ĩ", "i")
     phrase = phrase.gsub("õ", "o")
     phrase = phrase.gsub("ũ", "u")
+    phrase = phrase.gsub(" ", "+")
 
 
   	url = "https://www.vagas.com.br/vagas-de-#{phrase.gsub(" ","-")}?b%5B%5D=Home+office"
@@ -27,6 +28,12 @@ class CrawlerFather
 
   	url = "https://www.indeed.com.br/empregos-de-#{phrase.gsub(" ","-")}-remoto"
   	IndeedCrawler.new.call(all_jobs, url)
+
+    url = "https://www.catho.com.br/vagas/#{phrase}-remoto/?q=#{phrase}+remoto&pais_id=31&faixa_sal_id_combinar=1&perfil_id=1&order=score&where_search=1&how_search=2"
+    CathoCrawler.new.call(all_jobs, url)
+
+    url = "https://www.trabalhabrasil.com.br/vagas-empregos/#{phrase}/home-office"
+    TrabalhaBrasilCrawler.new.call(all_jobs, url)
 
   	all_jobs
   end
