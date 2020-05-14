@@ -29,10 +29,10 @@ class CrawlerFather
   	url = "https://www.indeed.com.br/empregos-de-#{phrase.gsub(" ","-")}-remoto"
   	IndeedCrawler.new.call(all_jobs, url)
 
-    url = "https://www.catho.com.br/vagas/#{phrase}-remoto/?q=#{phrase}+remoto&pais_id=31&faixa_sal_id_combinar=1&perfil_id=1&order=score&where_search=1&how_search=2"
+    url = "https://www.catho.com.br/vagas/#{phrase.gsub(" ","-")}-remoto/?q=#{phrase.gsub(" ","+")}+remoto&pais_id=31&faixa_sal_id_combinar=1&perfil_id=1&order=score&where_search=1&how_search=2"
     CathoCrawler.new.call(all_jobs, url)
 
-    url = "https://www.trabalhabrasil.com.br/vagas-empregos/#{phrase}/home-office"
+    url = "https://www.trabalhabrasil.com.br/vagas-empregos/#{phrase.gsub(" ","%20")}/home-office"
     TrabalhaBrasilCrawler.new.call(all_jobs, url)
 
   	all_jobs
